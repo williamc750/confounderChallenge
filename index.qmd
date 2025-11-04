@@ -5,7 +5,7 @@ format:
   html: default
 bibliography: references.bib
 execute:
-  echo: true
+  echo: false
   eval: true
 ---
 
@@ -216,26 +216,6 @@ plt.tight_layout()
 plt.show()
 ```
 
-## R
-
-```{r}
-#| label: fig-plot-outcomes-r
-#| fig-cap: "Post-Surgical Symptom Score (lower is better) - Observed Data"
-#| echo: true
-
-# TODO: Recover Figure 1 - Post-surgical outcomes by patient
-# Load data (already loaded above)
-# Create scatter plot with ggplot2 or base R
-# Include:
-#   - Different shapes for each doctor
-#   - Colorblind-friendly colors
-#   - Mean lines and annotations
-#   - Professional styling
-
-# Hint: Use ggplot2 for professional plots
-# Colors: Doc Dreamy = '#4E79A7' (blue), Doc Duck = '#E15759' (coral/red-orange)
-
-```
 :::
 
 ## The Hidden Confounder: Patient Severity Explains It All
@@ -440,19 +420,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## R
 
-```{r}
-#| label: fig-plot-outcomes-randomized-r
-#| fig-cap: "Post-Surgical Symptom Score (lower is better) for randomized patients."
-#| echo: true
-
-# TODO: Recover Figure 2 - Randomized assignment outcomes
-# Load randomized data (already loaded above)
-# Create scatter plot similar to Figure 1
-# Use same styling and color scheme
-
-```
 :::
 
 ## Solution 2: Stratification — When You Can't Randomize
@@ -549,22 +517,7 @@ plt.show()
 
 ## R
 
-```{r}
-#| label: fig-plot-outcomes-severity-r
-#| fig-cap: "Post-Surgical Symptom Score (lower is better) by Patient and Severity"
-#| echo: true
 
-# TODO: Recover Figure 3 - Outcomes by patient severity (stratification)
-# Load observational data (already loaded above)
-# Create scatter plot with:
-#   - X-axis: Initial Patient Severity
-#   - Y-axis: Post-Surgical Symptom Score
-#   - Same color/marker scheme as previous figures
-#   - Mean lines and annotations
-#   - Shaded region from -1 to 1 on x-axis
-#   - Professional styling
-
-```
 :::
 
 Looking at @fig-plot-outcomes-severity, the value of stratifying by severity is visually most obvious with initial patient severity scores between -1 and 1 (highlighted in the overlay). We chose this region because it shows substantial overlap between the two surgeons—both surgeons have considerable data within this range, making it an ideal region for comparing their performance. Outside of this range, there is less data available for making direct comparisons: Doc Duck sees more of the higher-severity patients (severity > 1), while Doc Dreamy sees more of the lower-severity patients (severity < -1).
