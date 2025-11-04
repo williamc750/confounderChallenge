@@ -493,7 +493,7 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 </div>
 </div>
 </div>
-<p><strong>?@fig-plot-outcomes-randomized</strong> shows the post-surgical symptom score for 100 patients under randomized assignment. Doc Duck’s average post-surgical symptom score is 2.71 while Doc Dreamy’s average is 3.46. Doc Duck performs better since lower scores indicate better outcomes. With randomization breaking the confounding relationship, we can now properly assess the causal effect. A two-sample t-test reveals a statistically significant difference (t = 2.734, p = 0.007). <strong>Not only is Dr.&nbsp;Dreamy not the better surgeon, he is actually the worse surgeon!</strong></p>
+<p><a href="#fig-plot-outcomes-randomized" class="quarto-xref">Figure&nbsp;5</a> shows the post-surgical symptom score for 100 patients under randomized assignment. Doc Duck’s average post-surgical symptom score is 2.71 while Doc Dreamy’s average is 3.46. Doc Duck performs better since lower scores indicate better outcomes. With randomization breaking the confounding relationship, we can now properly assess the causal effect. A two-sample t-test reveals a statistically significant difference (t = 2.734, p = 0.007). <strong>Not only is Dr.&nbsp;Dreamy not the better surgeon, he is actually the worse surgeon!</strong></p>
 </section>
 <section id="challenge-task-2-recover-figure-2-randomized-assignment-outcomes" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-task-2-recover-figure-2-randomized-assignment-outcomes">Challenge Task 2: Recover Figure 2 — Randomized Assignment Outcomes</h3>
@@ -509,11 +509,78 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># </span><span class="al">TODO</span><span class="co">: Recover Figure 2 - Randomized assignment outcomes</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Load randomized data (already loaded above)</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create scatter plot similar to Figure 1</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use same styling and color scheme</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Title: "Post-Surgical Symptom Score (Randomized Assignment)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate randomized data by doctor</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>dreamy_data_rand <span class="op">=</span> patients_randomized_df[patients_randomized_df[<span class="st">'doctor_name'</span>] <span class="op">==</span> <span class="st">'Doc Dreamy'</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>duck_data_rand <span class="op">=</span> patients_randomized_df[patients_randomized_df[<span class="st">'doctor_name'</span>] <span class="op">==</span> <span class="st">'Doc Duck'</span>]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate means for randomized data</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>dreamy_mean_rand <span class="op">=</span> dreamy_data_rand[<span class="st">'post_surgical_score'</span>].mean()</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>duck_mean_rand <span class="op">=</span> duck_data_rand[<span class="st">'post_surgical_score'</span>].mean()</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create figure with professional styling (same as Figure 1)</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">7</span>))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot scatter points for Doc Dreamy (circles, blue)</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>ax.scatter(dreamy_data_rand[<span class="st">'patient'</span>], dreamy_data_rand[<span class="st">'post_surgical_score'</span>], </span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>           marker<span class="op">=</span><span class="st">'o'</span>, color<span class="op">=</span><span class="st">'#4E79A7'</span>, s<span class="op">=</span><span class="dv">60</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, </span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>           label<span class="op">=</span><span class="st">'Doc Dreamy'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot scatter points for Doc Duck (triangles, coral)</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>ax.scatter(duck_data_rand[<span class="st">'patient'</span>], duck_data_rand[<span class="st">'post_surgical_score'</span>], </span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>           marker<span class="op">=</span><span class="st">'^'</span>, color<span class="op">=</span><span class="st">'#E15759'</span>, s<span class="op">=</span><span class="dv">60</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, </span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>           label<span class="op">=</span><span class="st">'Doc Duck'</span>, zorder<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Add horizontal dashed lines for means</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span>dreamy_mean_rand, color<span class="op">=</span><span class="st">'#4E79A7'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>           alpha<span class="op">=</span><span class="fl">0.8</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>ax.axhline(y<span class="op">=</span>duck_mean_rand, color<span class="op">=</span><span class="st">'#E15759'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, linewidth<span class="op">=</span><span class="dv">2</span>, </span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>           alpha<span class="op">=</span><span class="fl">0.8</span>, zorder<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Add text annotations with shape symbols and mean values</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>max_patient_rand <span class="op">=</span> patients_randomized_df[<span class="st">'patient'</span>].<span class="bu">max</span>()</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>ax.text(max_patient_rand <span class="op">*</span> <span class="fl">0.98</span>, dreamy_mean_rand, <span class="ss">f'○ </span><span class="sc">{</span>dreamy_mean_rand<span class="sc">:.2f}</span><span class="ss">'</span>, </span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'#4E79A7'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">'center'</span>, horizontalalignment<span class="op">=</span><span class="st">'right'</span>,</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">'round,pad=0.3'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>, </span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>                 edgecolor<span class="op">=</span><span class="st">'#4E79A7'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>), zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>ax.text(max_patient_rand <span class="op">*</span> <span class="fl">0.98</span>, duck_mean_rand, <span class="ss">f'△ </span><span class="sc">{</span>duck_mean_rand<span class="sc">:.2f}</span><span class="ss">'</span>, </span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>        color<span class="op">=</span><span class="st">'#E15759'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>,</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>        verticalalignment<span class="op">=</span><span class="st">'center'</span>, horizontalalignment<span class="op">=</span><span class="st">'right'</span>,</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">'round,pad=0.3'</span>, facecolor<span class="op">=</span><span class="st">'white'</span>, </span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>                 edgecolor<span class="op">=</span><span class="st">'#E15759'</span>, alpha<span class="op">=</span><span class="fl">0.8</span>), zorder<span class="op">=</span><span class="dv">4</span>)</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Professional styling (consistent with Figure 1)</span></span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">'Patient Number'</span>, fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">'Post-Surgical Symptom Score (Lower is Better)'</span>, </span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>              fontsize<span class="op">=</span><span class="dv">12</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Post-Surgical Symptom Score by Patient and Doctor (Randomized Assignment)'</span>, </span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>             fontsize<span class="op">=</span><span class="dv">14</span>, fontweight<span class="op">=</span><span class="st">'bold'</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Add grid</span></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>ax.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, zorder<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Add legend</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>ax.legend(loc<span class="op">=</span><span class="st">'upper right'</span>, fontsize<span class="op">=</span><span class="dv">11</span>, framealpha<span class="op">=</span><span class="fl">0.9</span>)</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust layout</span></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-plot-outcomes-randomized" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-plot-outcomes-randomized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-plot-outcomes-randomized-1.png" class="img-fluid figure-img" width="1152">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-randomized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized patients.
+</figcaption>
+</figure>
+</div>
+</div>
 </div>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
