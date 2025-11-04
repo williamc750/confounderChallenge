@@ -103,7 +103,7 @@ patients_df.head()
 
 ```{python}
 #| label: load-data-python
-#| echo: true
+#| echo: false
 
 import pandas as pd
 
@@ -115,19 +115,6 @@ print(f"Number of patients: {len(patients_df)}")
 patients_df.head()
 ```
 
-## R
-
-```{r}
-#| label: load-data-r
-#| echo: true
-
-# Load the observational data
-patients_df <- read.csv('patients_data.csv')
-
-# Display first few rows to understand the structure
-cat("Number of patients:", nrow(patients_df), "\n")
-head(patients_df)
-```
 :::
 
 Let's use data to figure out which surgeon performs better. @fig-plot-outcomes shows the post-surgical symptom score for 100 patients. Doc Duck's average post-surgical symptom score is 3.38 while Doc Dreamy's average is 2.8. Doc Dreamy performs better since lower scores indicate better outcomes. One might ask if the difference in average post-surgical symptom score is statistically significant. A two-sample t-test reveals a statistically significant difference (t = -2.317, p = 0.023). 
@@ -151,7 +138,7 @@ Let's use data to figure out which surgeon performs better. @fig-plot-outcomes s
 ```{python}
 #| label: fig-plot-outcomes
 #| fig-cap: "Post-Surgical Symptom Score (lower is better) - Observed Data"
-#| echo: true
+#| echo: false
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -261,7 +248,7 @@ Since we cannot rerun history with randomization, we run an experiment to collec
 
 ```{python}
 #| label: simulate-data-randomized
-#| echo: true
+#| echo: false
 #| message: false
 #| warning: false
 #| include: false
@@ -312,7 +299,7 @@ patients_randomized_df.head()
 
 ```{python}
 #| label: load-data-randomized-python
-#| echo: true
+#| echo: false
 
 import pandas as pd
 
@@ -324,19 +311,6 @@ print(f"Number of randomized patients: {len(patients_randomized_df)}")
 patients_randomized_df.head()
 ```
 
-## R
-
-```{r}
-#| label: load-data-randomized-r
-#| echo: true
-
-# Load the randomized data
-patients_randomized_df <- read.csv('patients_data_randomized.csv')
-
-# Display first few rows
-cat("Number of randomized patients:", nrow(patients_randomized_df), "\n")
-head(patients_randomized_df)
-```
 :::
 
 @fig-plot-outcomes-randomized shows the post-surgical symptom score for 100 patients under randomized assignment. Doc Duck's average post-surgical symptom score is 2.71 while Doc Dreamy's average is 3.46. Doc Duck performs better since lower scores indicate better outcomes. With randomization breaking the confounding relationship, we can now properly assess the causal effect. A two-sample t-test reveals a statistically significant difference (t = 2.734, p = 0.007).  **Not only is Dr. Dreamy not the better surgeon, he is actually the worse surgeon!**
@@ -356,7 +330,7 @@ head(patients_randomized_df)
 ```{python}
 #| label: fig-plot-outcomes-randomized
 #| fig-cap: "Post-Surgical Symptom Score (lower is better) for randomized patients."
-#| echo: true
+#| echo: false
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -446,7 +420,7 @@ The key to handling a common cause confounder is to stratify by the common cause
 ```{python}
 #| label: fig-plot-outcomes-severity
 #| fig-cap: "Post-Surgical Symptom Score (lower is better) by Patient and Severity"
-#| echo: true
+#| echo: false
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -514,8 +488,6 @@ ax.legend(loc='upper right', fontsize=11, framealpha=0.9)
 plt.tight_layout()
 plt.show()
 ```
-
-## R
 
 
 :::
