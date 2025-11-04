@@ -411,7 +411,7 @@ duck_mean_sev = duck_data_sev['post_surgical_score'].mean()
 fig, ax = plt.subplots(figsize=(7, 4.5))
 
 # Add shaded region highlighting severity between -1 and 1 (zorder=0 so it's behind everything)
-ax.axvspan(-1, 1, alpha=0.15, color='gray', zorder=0)
+ax.axvspan(-1, 1, alpha=0.35, color='gray', edgecolor='darkgray', linewidth=1.5, zorder=0)
 
 # Plot scatter points for Doc Dreamy (circles, blue) - severity on x-axis
 ax.scatter(dreamy_data_sev['severity'], dreamy_data_sev['post_surgical_score'], 
