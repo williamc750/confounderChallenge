@@ -183,7 +183,7 @@ window.Quarto = {
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of patients: 100</code></pre>
 </div>
-<div id="load-data-python" class="cell-output cell-output-display" data-execution_count="2">
+<div id="load-data-python" class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -251,17 +251,6 @@ window.Quarto = {
 <p>Let’s use data to figure out which surgeon performs better. <a href="#fig-plot-outcomes" class="quarto-xref">Figure&nbsp;1</a> shows the post-surgical symptom score for 100 patients. Doc Duck’s average post-surgical symptom score is 3.38 while Doc Dreamy’s average is 2.8. Doc Dreamy performs better since lower scores indicate better outcomes. One might ask if the difference in average post-surgical symptom score is statistically significant. A two-sample t-test reveals a statistically significant difference (t = -2.317, p = 0.023).</p>
 <section id="post-surgical-outcomes-by-patient" class="level3">
 <h3 class="anchored" data-anchor-id="post-surgical-outcomes-by-patient">Post-Surgical Outcomes by Patient</h3>
-<p><strong>Your task:</strong> Create a scatter plot showing post-surgical symptom scores by patient number, with different markers/colors for each doctor. The figure should include:</p>
-<ul>
-<li>Scatter points for each patient (Doc Dreamy: circles, Doc Duck: triangles)</li>
-<li>Horizontal dashed lines showing the mean for each doctor</li>
-<li>Text annotations showing the mean values with shape symbols (○ for Doc Dreamy, △ for Doc Duck)</li>
-<li>Colorblind-friendly colors (blue for Doc Dreamy, coral/red-orange for Doc Duck)</li>
-<li>Professional styling: clear labels, grid, legend, appropriate font sizes</li>
-<li>X-axis: Patient Number</li>
-<li>Y-axis: Post-Surgical Symptom Score (Lower is Better)</li>
-<li>Title: “Post-Surgical Symptom Score by Patient and Doctor”</li>
-</ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -271,7 +260,7 @@ window.Quarto = {
 <div id="fig-plot-outcomes" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plot-outcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-plot-outcomes-output-1.png" width="855" height="518" class="figure-img">
+<img src="index_files/figure-html/fig-plot-outcomes-output-1.png" width="663" height="422" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Post-Surgical Symptom Score (lower is better) - Observed Data
@@ -366,7 +355,7 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of randomized patients: 100</code></pre>
 </div>
-<div id="load-data-randomized-python" class="cell-output cell-output-display" data-execution_count="5">
+<div id="load-data-randomized-python" class="cell-output cell-output-display" data-execution_count="12">
 <div>
 
 
@@ -435,13 +424,6 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 </section>
 <section id="randomized-assignment-outcomes" class="level3">
 <h3 class="anchored" data-anchor-id="randomized-assignment-outcomes">Randomized Assignment Outcomes</h3>
-<p><strong>Your task:</strong> Create a scatter plot similar to Figure 1, but for the randomized data. The figure should show how randomization breaks the confounding relationship. Include:</p>
-<ul>
-<li>Same styling as Figure 1 (markers, colors, mean lines, annotations)</li>
-<li>Title should indicate this is randomized assignment</li>
-<li>Same colorblind-friendly color scheme</li>
-<li>Professional styling consistent with Figure 1</li>
-</ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -451,7 +433,7 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 <div id="fig-plot-outcomes-randomized" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plot-outcomes-randomized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-plot-outcomes-randomized-output-1.png" width="873" height="518" class="figure-img">
+<img src="index_files/figure-html/fig-plot-outcomes-randomized-output-1.png" width="852" height="422" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-randomized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized patients.
@@ -470,17 +452,6 @@ Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized pati
 <p>The key to handling a common cause confounder is to stratify by the common cause. In general, this means we examine the relationship between treatment and outcome within groups that share the same value of the confounder. In our example, this means we look at patients of similar severity and compare the outcomes of the surgeons for patients of similar severity. There are mathematically sophisticated ways to do this, but here we demonstrate it visually. Since patient number lacks inherent meaning, the following figure shows patient severity on the x-axis and post-surgical symptom score on the y-axis.</p>
 <section id="outcomes-by-patient-severity-stratification" class="level3">
 <h3 class="anchored" data-anchor-id="outcomes-by-patient-severity-stratification">Outcomes by Patient Severity (Stratification)</h3>
-<p><strong>Your task:</strong> Create a scatter plot showing post-surgical outcomes as a function of initial patient severity. This figure demonstrates the power of stratification. Include:</p>
-<ul>
-<li>X-axis: Initial Patient Severity</li>
-<li>Y-axis: Post-Surgical Symptom Score (Lower is Better)</li>
-<li>Scatter points colored/marked by doctor (same scheme as previous figures)</li>
-<li>Mean horizontal lines for each doctor</li>
-<li>A rectangular overlay (shaded region) highlighting severity between -1 and 1</li>
-<li>Text annotations for means positioned appropriately</li>
-<li>Title: “Post-Surgical Symptom Score by Patient Severity”</li>
-<li>This figure should reveal the confounding by showing how severity affects both surgeon assignment and outcomes</li>
-</ul>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Python</a></li></ul>
 <div class="tab-content">
@@ -490,7 +461,7 @@ Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized pati
 <div id="fig-plot-outcomes-severity" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plot-outcomes-severity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-plot-outcomes-severity-output-1.png" width="855" height="518" class="figure-img">
+<img src="index_files/figure-html/fig-plot-outcomes-severity-output-1.png" width="663" height="422" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-severity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: Post-Surgical Symptom Score (lower is better) by Patient and Severity

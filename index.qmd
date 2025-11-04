@@ -121,16 +121,6 @@ Let's use data to figure out which surgeon performs better. @fig-plot-outcomes s
 
 ### Post-Surgical Outcomes by Patient
 
-**Your task:** Create a scatter plot showing post-surgical symptom scores by patient number, with different markers/colors for each doctor. The figure should include:
-
-- Scatter points for each patient (Doc Dreamy: circles, Doc Duck: triangles)
-- Horizontal dashed lines showing the mean for each doctor
-- Text annotations showing the mean values with shape symbols (○ for Doc Dreamy, △ for Doc Duck)
-- Colorblind-friendly colors (blue for Doc Dreamy, coral/red-orange for Doc Duck)
-- Professional styling: clear labels, grid, legend, appropriate font sizes
-- X-axis: Patient Number
-- Y-axis: Post-Surgical Symptom Score (Lower is Better)
-- Title: "Post-Surgical Symptom Score by Patient and Doctor"
 
 ::: {.panel-tabset}
 ## Python
@@ -152,7 +142,7 @@ dreamy_mean = dreamy_data['post_surgical_score'].mean()
 duck_mean = duck_data['post_surgical_score'].mean()
 
 # Create figure with professional styling
-fig, ax = plt.subplots(figsize=(9, 5.5))
+fig, ax = plt.subplots(figsize=(7, 4.5))
 
 # Plot scatter points for Doc Dreamy (circles, blue)
 ax.scatter(dreamy_data['patient'], dreamy_data['post_surgical_score'], 
@@ -317,12 +307,6 @@ patients_randomized_df.head()
 
 ### Randomized Assignment Outcomes
 
-**Your task:** Create a scatter plot similar to Figure 1, but for the randomized data. The figure should show how randomization breaks the confounding relationship. Include:
-
-- Same styling as Figure 1 (markers, colors, mean lines, annotations)
-- Title should indicate this is randomized assignment
-- Same colorblind-friendly color scheme
-- Professional styling consistent with Figure 1
 
 ::: {.panel-tabset}
 ## Python
@@ -344,7 +328,7 @@ dreamy_mean_rand = dreamy_data_rand['post_surgical_score'].mean()
 duck_mean_rand = duck_data_rand['post_surgical_score'].mean()
 
 # Create figure with professional styling (same as Figure 1)
-fig, ax = plt.subplots(figsize=(9, 5.5))
+fig, ax = plt.subplots(figsize=(7, 4.5))
 
 # Plot scatter points for Doc Dreamy (circles, blue)
 ax.scatter(dreamy_data_rand['patient'], dreamy_data_rand['post_surgical_score'], 
@@ -403,16 +387,6 @@ The key to handling a common cause confounder is to stratify by the common cause
 
 ### Outcomes by Patient Severity (Stratification)
 
-**Your task:** Create a scatter plot showing post-surgical outcomes as a function of initial patient severity. This figure demonstrates the power of stratification. Include:
-
-- X-axis: Initial Patient Severity
-- Y-axis: Post-Surgical Symptom Score (Lower is Better)
-- Scatter points colored/marked by doctor (same scheme as previous figures)
-- Mean horizontal lines for each doctor
-- A rectangular overlay (shaded region) highlighting severity between -1 and 1
-- Text annotations for means positioned appropriately
-- Title: "Post-Surgical Symptom Score by Patient Severity"
-- This figure should reveal the confounding by showing how severity affects both surgeon assignment and outcomes
 
 ::: {.panel-tabset}
 ## Python
@@ -434,7 +408,7 @@ dreamy_mean_sev = dreamy_data_sev['post_surgical_score'].mean()
 duck_mean_sev = duck_data_sev['post_surgical_score'].mean()
 
 # Create figure with professional styling (same as previous figures)
-fig, ax = plt.subplots(figsize=(9, 5.5))
+fig, ax = plt.subplots(figsize=(7, 4.5))
 
 # Add shaded region highlighting severity between -1 and 1 (zorder=0 so it's behind everything)
 ax.axvspan(-1, 1, alpha=0.15, color='gray', zorder=0)
