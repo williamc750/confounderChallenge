@@ -480,18 +480,71 @@ The key to handling a common cause confounder is to stratify by the common cause
 #| fig-cap: "Post-Surgical Symptom Score (lower is better) by Patient and Severity"
 #| echo: true
 
-# TODO: Recover Figure 3 - Outcomes by patient severity (stratification)
-# Load observational data (already loaded above)
-# Create scatter plot with:
-#   - X-axis: Initial Patient Severity
-#   - Y-axis: Post-Surgical Symptom Score
-#   - Same color/marker scheme as previous figures
-#   - Mean lines and annotations
-#   - Shaded region from -1 to 1 on x-axis (use ax.axvspan or similar)
-#   - Professional styling
+import matplotlib.pyplot as plt
+import numpy as np
 
-# Hint: Use axvspan(-1, 1, alpha=0.15, color='gray', zorder=0) for the overlay
+# Separate observational data by doctor (use patients_df for stratification)
+dreamy_data_sev = patients_df[patients_df['doctor_name'] == 'Doc Dreamy']
+duck_data_sev = patients_df[patients_df['doctor_name'] == 'Doc Duck']
 
+# Calculate overall means for each doctor
+dreamy_mean_sev = dreamy_data_sev['post_surgical_score'].mean()
+duck_mean_sev = duck_data_sev['post_surgical_score'].mean()
+
+# Create figure with professional styling (same as previous figures)
+fig, ax = plt.subplots(figsize=(12, 7))
+
+# Add shaded region highlighting severity between -1 and 1 (zorder=0 so it's behind everything)
+ax.axvspan(-1, 1, alpha=0.15, color='gray', zorder=0)
+
+# Plot scatter points for Doc Dreamy (circles, blue) - severity on x-axis
+ax.scatter(dreamy_data_sev['severity'], dreamy_data_sev['post_surgical_score'], 
+           marker='o', color='#4E79A7', s=60, alpha=0.7, 
+           label='Doc Dreamy', zorder=3)
+
+# Plot scatter points for Doc Duck (triangles, coral) - severity on x-axis
+ax.scatter(duck_data_sev['severity'], duck_data_sev['post_surgical_score'], 
+           marker='^', color='#E15759', s=60, alpha=0.7, 
+           label='Doc Duck', zorder=3)
+
+# Add horizontal dashed lines for overall means
+ax.axhline(y=dreamy_mean_sev, color='#4E79A7', linestyle='--', linewidth=2, 
+           alpha=0.8, zorder=2)
+ax.axhline(y=duck_mean_sev, color='#E15759', linestyle='--', linewidth=2, 
+           alpha=0.8, zorder=2)
+
+# Add text annotations with shape symbols and mean values
+# Position annotations at the top right of the plot
+max_severity = patients_df['severity'].max()
+max_score = patients_df['post_surgical_score'].max()
+ax.text(max_severity * 0.95, dreamy_mean_sev, f'○ {dreamy_mean_sev:.2f}', 
+        color='#4E79A7', fontsize=11, fontweight='bold',
+        verticalalignment='center', horizontalalignment='right',
+        bbox=dict(boxstyle='round,pad=0.3', facecolor='white', 
+                 edgecolor='#4E79A7', alpha=0.8), zorder=4)
+
+ax.text(max_severity * 0.95, duck_mean_sev, f'△ {duck_mean_sev:.2f}', 
+        color='#E15759', fontsize=11, fontweight='bold',
+        verticalalignment='center', horizontalalignment='right',
+        bbox=dict(boxstyle='round,pad=0.3', facecolor='white', 
+                 edgecolor='#E15759', alpha=0.8), zorder=4)
+
+# Professional styling (consistent with previous figures)
+ax.set_xlabel('Initial Patient Severity', fontsize=12, fontweight='bold')
+ax.set_ylabel('Post-Surgical Symptom Score (Lower is Better)', 
+              fontsize=12, fontweight='bold')
+ax.set_title('Post-Surgical Symptom Score by Patient Severity', 
+             fontsize=14, fontweight='bold', pad=15)
+
+# Add grid
+ax.grid(True, linestyle='--', alpha=0.3, zorder=1)
+
+# Add legend
+ax.legend(loc='upper right', fontsize=11, framealpha=0.9)
+
+# Adjust layout
+plt.tight_layout()
+plt.show()
 ```
 
 ## R
