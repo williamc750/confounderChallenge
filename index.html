@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Confounder &amp; Randomization Challenge</title>
+<title>Using Randomization &amp; Stratification to Overcome A Common Cause Confounder</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -99,7 +99,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Confounder &amp; Randomization Challenge</h1>
+<h1 class="title">Using Randomization &amp; Stratification to Overcome A Common Cause Confounder</h1>
 <p class="subtitle lead">Recovering Lost Figures: Visualizing Confounders and Causal Inference</p>
 </div>
 
@@ -123,7 +123,7 @@ window.Quarto = {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>📋 The Challenge: Recover the Lost Figures!
+<span class="screen-reader-only">Important</span>📋 Recover the Lost Figures!
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -249,8 +249,8 @@ window.Quarto = {
 </div>
 </div>
 <p>Let’s use data to figure out which surgeon performs better. <a href="#fig-plot-outcomes" class="quarto-xref">Figure&nbsp;1</a> shows the post-surgical symptom score for 100 patients. Doc Duck’s average post-surgical symptom score is 3.38 while Doc Dreamy’s average is 2.8. Doc Dreamy performs better since lower scores indicate better outcomes. One might ask if the difference in average post-surgical symptom score is statistically significant. A two-sample t-test reveals a statistically significant difference (t = -2.317, p = 0.023).</p>
-<section id="challenge-task-1-recover-figure-1-post-surgical-outcomes-by-patient" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-task-1-recover-figure-1-post-surgical-outcomes-by-patient">Challenge Task 1: Recover Figure 1 — Post-Surgical Outcomes by Patient</h3>
+<section id="post-surgical-outcomes-by-patient" class="level3">
+<h3 class="anchored" data-anchor-id="post-surgical-outcomes-by-patient">Post-Surgical Outcomes by Patient</h3>
 <p><strong>Your task:</strong> Create a scatter plot showing post-surgical symptom scores by patient number, with different markers/colors for each doctor. The figure should include:</p>
 <ul>
 <li>Scatter points for each patient (Doc Dreamy: circles, Doc Duck: triangles)</li>
@@ -271,7 +271,7 @@ window.Quarto = {
 <div id="fig-plot-outcomes" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plot-outcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-plot-outcomes-output-1.png" width="1143" height="662" class="figure-img">
+<img src="index_files/figure-html/fig-plot-outcomes-output-1.png" width="855" height="518" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Post-Surgical Symptom Score (lower is better) - Observed Data
@@ -433,8 +433,8 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 </div>
 <p><a href="#fig-plot-outcomes-randomized" class="quarto-xref">Figure&nbsp;5</a> shows the post-surgical symptom score for 100 patients under randomized assignment. Doc Duck’s average post-surgical symptom score is 2.71 while Doc Dreamy’s average is 3.46. Doc Duck performs better since lower scores indicate better outcomes. With randomization breaking the confounding relationship, we can now properly assess the causal effect. A two-sample t-test reveals a statistically significant difference (t = 2.734, p = 0.007). <strong>Not only is Dr.&nbsp;Dreamy not the better surgeon, he is actually the worse surgeon!</strong></p>
 </section>
-<section id="challenge-task-2-recover-figure-2-randomized-assignment-outcomes" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-task-2-recover-figure-2-randomized-assignment-outcomes">Challenge Task 2: Recover Figure 2 — Randomized Assignment Outcomes</h3>
+<section id="randomized-assignment-outcomes" class="level3">
+<h3 class="anchored" data-anchor-id="randomized-assignment-outcomes">Randomized Assignment Outcomes</h3>
 <p><strong>Your task:</strong> Create a scatter plot similar to Figure 1, but for the randomized data. The figure should show how randomization breaks the confounding relationship. Include:</p>
 <ul>
 <li>Same styling as Figure 1 (markers, colors, mean lines, annotations)</li>
@@ -451,7 +451,7 @@ Figure&nbsp;4: DAG Model Explaining Surgical Outcomes
 <div id="fig-plot-outcomes-randomized" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plot-outcomes-randomized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-plot-outcomes-randomized-output-1.png" width="1143" height="662" class="figure-img">
+<img src="index_files/figure-html/fig-plot-outcomes-randomized-output-1.png" width="873" height="518" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-randomized-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized patients.
@@ -468,8 +468,8 @@ Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized pati
 <section id="solution-2-stratification-when-you-cant-randomize" class="level2">
 <h2 class="anchored" data-anchor-id="solution-2-stratification-when-you-cant-randomize">Solution 2: Stratification — When You Can’t Randomize</h2>
 <p>The key to handling a common cause confounder is to stratify by the common cause. In general, this means we examine the relationship between treatment and outcome within groups that share the same value of the confounder. In our example, this means we look at patients of similar severity and compare the outcomes of the surgeons for patients of similar severity. There are mathematically sophisticated ways to do this, but here we demonstrate it visually. Since patient number lacks inherent meaning, the following figure shows patient severity on the x-axis and post-surgical symptom score on the y-axis.</p>
-<section id="challenge-task-3-recover-figure-3-outcomes-by-patient-severity-stratification" class="level3">
-<h3 class="anchored" data-anchor-id="challenge-task-3-recover-figure-3-outcomes-by-patient-severity-stratification">Challenge Task 3: Recover Figure 3 — Outcomes by Patient Severity (Stratification)</h3>
+<section id="outcomes-by-patient-severity-stratification" class="level3">
+<h3 class="anchored" data-anchor-id="outcomes-by-patient-severity-stratification">Outcomes by Patient Severity (Stratification)</h3>
 <p><strong>Your task:</strong> Create a scatter plot showing post-surgical outcomes as a function of initial patient severity. This figure demonstrates the power of stratification. Include:</p>
 <ul>
 <li>X-axis: Initial Patient Severity</li>
@@ -490,7 +490,7 @@ Figure&nbsp;5: Post-Surgical Symptom Score (lower is better) for randomized pati
 <div id="fig-plot-outcomes-severity" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-plot-outcomes-severity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="index_files/figure-html/fig-plot-outcomes-severity-output-1.png" width="1143" height="662" class="figure-img">
+<img src="index_files/figure-html/fig-plot-outcomes-severity-output-1.png" width="855" height="518" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-plot-outcomes-severity-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;6: Post-Surgical Symptom Score (lower is better) by Patient and Severity
@@ -514,48 +514,6 @@ Figure&nbsp;6: Post-Surgical Symptom Score (lower is better) by Patient and Seve
 <p>Randomization is an excellent defense against this kind of confounding. Flip a coin, assign patients randomly, and suddenly the puppeteer loses control. Now you can actually see who the better surgeon is. And the surprise is that it’s the one who doesn’t look the part. The data wasn’t lying; it was just answering a different question than you thought you were asking.</p>
 <p>If you can’t randomize, and that’s most of the time, you stratify. Look within groups of similar patient severity. Compare apples to apples, not apples to oranges. It’s more work, and it’s less satisfying than a clean randomized trial, but it’s better than being fooled by confounding.</p>
 <p>The take-home lesson: The world is messy, and the numbers will mislead you if you let them. But if you understand the structure of the problem, if you draw the DAG and think about what causes what, you can defend yourself against being fooled. Randomization when you can, stratification when you can’t. The tools are simple. The hard part is remembering to use them.</p>
-</section>
-<section id="professional-presentation-guidelines" class="level2">
-<h2 class="anchored" data-anchor-id="professional-presentation-guidelines">Professional Presentation Guidelines</h2>
-<ul>
-<li><strong>Clear narrative:</strong> Your figures should tell the story described in the text</li>
-<li><strong>Consistent styling:</strong> All three figures should use the same color scheme and styling approach</li>
-<li><strong>Colorblind-friendly:</strong> Use the specified colors (#4E79A7 for Doc Dreamy, #E15759 for Doc Duck)</li>
-<li><strong>Professional quality:</strong> Clear labels, appropriate fonts, grid lines, legends</li>
-<li><strong>Match the narrative:</strong> Your figures should illustrate the points made in the text about confounding, randomization, and stratification</li>
-</ul>
-</section>
-<section id="submission-checklist" class="level2">
-<h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist ✅</h2>
-<p><strong>For 85% (Base Grade):</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Fork the <code>confounderChallenge</code> repository</label></li>
-<li><label><input type="checkbox">Clone locally and open in Cursor</label></li>
-<li><label><input type="checkbox">Recover all three figures (Tasks 1-3)</label></li>
-<li><label><input type="checkbox">Ensure figures match the narrative descriptions</label></li>
-<li><label><input type="checkbox">Render to HTML (<code>quarto render</code> or Render button)</label></li>
-<li><label><input type="checkbox">Verify all figures render correctly</label></li>
-<li><label><input type="checkbox">Push HTML to your repo and enable GitHub Pages</label></li>
-<li><label><input type="checkbox">Share your site: <code>https://[your-username].github.io/confounderChallenge/</code></label></li>
-</ul>
-<p><strong>For Final 15% (Bonus - 100% Total):</strong></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Remove all challenge-related comments from code (no “TODO”, “Challenge Task”, “Recover Figure”)</label></li>
-<li><label><input type="checkbox">Transform document title/subtitle to “Using Randomization &amp; Stratification to Overcome A Common Cause Confounder”</label></li>
-<li><label><input type="checkbox">Remove challenge framing sections (challenge callout, submission checklist, tips)</label></li>
-<li><label><input type="checkbox">Polish the document to read like a complete, professional report</label></li>
-<li><label><input type="checkbox">Ensure the narrative flows naturally without challenge references</label></li>
-</ul>
-</section>
-<section id="tips" class="level2">
-<h2 class="anchored" data-anchor-id="tips">Tips</h2>
-<ul>
-<li>Read the narrative carefully—it contains hints about what each figure should show</li>
-<li>Use the statistical results mentioned in the text to verify your figures are correct</li>
-<li>Keep styling consistent across all three figures</li>
-<li>Test with both R and Python code chunks if you want to show versatility</li>
-<li>Set random seeds if you’re doing any additional analysis for reproducibility</li>
-</ul>
 
 </section>
 

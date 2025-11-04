@@ -1,5 +1,5 @@
 ---
-title: "Confounder & Randomization Challenge"
+title: "Using Randomization & Stratification to Overcome A Common Cause Confounder"
 subtitle: "Recovering Lost Figures: Visualizing Confounders and Causal Inference"
 format:
   html: default
@@ -10,7 +10,7 @@ execute:
 ---
 
 :::: {.callout-important}
-## 📋 The Challenge: Recover the Lost Figures!
+## 📋 Recover the Lost Figures!
 
 A critical report on confounding and causal inference was being prepared when disaster struck—the figures were lost! The data files survived (`patients_data.csv` and `patients_data_randomized.csv`), and the narrative text is intact, but **all three key visualizations have disappeared**.
 
@@ -119,7 +119,7 @@ patients_df.head()
 
 Let's use data to figure out which surgeon performs better. @fig-plot-outcomes shows the post-surgical symptom score for 100 patients. Doc Duck's average post-surgical symptom score is 3.38 while Doc Dreamy's average is 2.8. Doc Dreamy performs better since lower scores indicate better outcomes. One might ask if the difference in average post-surgical symptom score is statistically significant. A two-sample t-test reveals a statistically significant difference (t = -2.317, p = 0.023). 
 
-### Challenge Task 1: Recover Figure 1 — Post-Surgical Outcomes by Patient
+### Post-Surgical Outcomes by Patient
 
 **Your task:** Create a scatter plot showing post-surgical symptom scores by patient number, with different markers/colors for each doctor. The figure should include:
 
@@ -152,7 +152,7 @@ dreamy_mean = dreamy_data['post_surgical_score'].mean()
 duck_mean = duck_data['post_surgical_score'].mean()
 
 # Create figure with professional styling
-fig, ax = plt.subplots(figsize=(12, 7))
+fig, ax = plt.subplots(figsize=(9, 5.5))
 
 # Plot scatter points for Doc Dreamy (circles, blue)
 ax.scatter(dreamy_data['patient'], dreamy_data['post_surgical_score'], 
@@ -315,7 +315,7 @@ patients_randomized_df.head()
 
 @fig-plot-outcomes-randomized shows the post-surgical symptom score for 100 patients under randomized assignment. Doc Duck's average post-surgical symptom score is 2.71 while Doc Dreamy's average is 3.46. Doc Duck performs better since lower scores indicate better outcomes. With randomization breaking the confounding relationship, we can now properly assess the causal effect. A two-sample t-test reveals a statistically significant difference (t = 2.734, p = 0.007).  **Not only is Dr. Dreamy not the better surgeon, he is actually the worse surgeon!**
 
-### Challenge Task 2: Recover Figure 2 — Randomized Assignment Outcomes
+### Randomized Assignment Outcomes
 
 **Your task:** Create a scatter plot similar to Figure 1, but for the randomized data. The figure should show how randomization breaks the confounding relationship. Include:
 
@@ -344,7 +344,7 @@ dreamy_mean_rand = dreamy_data_rand['post_surgical_score'].mean()
 duck_mean_rand = duck_data_rand['post_surgical_score'].mean()
 
 # Create figure with professional styling (same as Figure 1)
-fig, ax = plt.subplots(figsize=(12, 7))
+fig, ax = plt.subplots(figsize=(9, 5.5))
 
 # Plot scatter points for Doc Dreamy (circles, blue)
 ax.scatter(dreamy_data_rand['patient'], dreamy_data_rand['post_surgical_score'], 
@@ -401,7 +401,7 @@ plt.show()
 
 The key to handling a common cause confounder is to stratify by the common cause. In general, this means we examine the relationship between treatment and outcome within groups that share the same value of the confounder. In our example, this means we look at patients of similar severity and compare the outcomes of the surgeons for patients of similar severity. There are mathematically sophisticated ways to do this, but here we demonstrate it visually. Since patient number lacks inherent meaning, the following figure shows patient severity on the x-axis and post-surgical symptom score on the y-axis.  
 
-### Challenge Task 3: Recover Figure 3 — Outcomes by Patient Severity (Stratification)
+### Outcomes by Patient Severity (Stratification)
 
 **Your task:** Create a scatter plot showing post-surgical outcomes as a function of initial patient severity. This figure demonstrates the power of stratification. Include:
 
@@ -434,7 +434,7 @@ dreamy_mean_sev = dreamy_data_sev['post_surgical_score'].mean()
 duck_mean_sev = duck_data_sev['post_surgical_score'].mean()
 
 # Create figure with professional styling (same as previous figures)
-fig, ax = plt.subplots(figsize=(12, 7))
+fig, ax = plt.subplots(figsize=(9, 5.5))
 
 # Add shaded region highlighting severity between -1 and 1 (zorder=0 so it's behind everything)
 ax.axvspan(-1, 1, alpha=0.15, color='gray', zorder=0)
@@ -510,39 +510,3 @@ If you can't randomize, and that's most of the time, you stratify. Look within g
 
 The take-home lesson: The world is messy, and the numbers will mislead you if you let them. But if you understand the structure of the problem, if you draw the DAG and think about what causes what, you can defend yourself against being fooled. Randomization when you can, stratification when you can't. The tools are simple. The hard part is remembering to use them.
 
-## Professional Presentation Guidelines
-
-- **Clear narrative:** Your figures should tell the story described in the text
-- **Consistent styling:** All three figures should use the same color scheme and styling approach
-- **Colorblind-friendly:** Use the specified colors (#4E79A7 for Doc Dreamy, #E15759 for Doc Duck)
-- **Professional quality:** Clear labels, appropriate fonts, grid lines, legends
-- **Match the narrative:** Your figures should illustrate the points made in the text about confounding, randomization, and stratification
-
-## Submission Checklist ✅
-
-**For 85% (Base Grade):**
-
-- [ ] Fork the `confounderChallenge` repository
-- [ ] Clone locally and open in Cursor
-- [ ] Recover all three figures (Tasks 1-3)
-- [ ] Ensure figures match the narrative descriptions
-- [ ] Render to HTML (`quarto render` or Render button)
-- [ ] Verify all figures render correctly
-- [ ] Push HTML to your repo and enable GitHub Pages
-- [ ] Share your site: `https://[your-username].github.io/confounderChallenge/`
-
-**For Final 15% (Bonus - 100% Total):**
-
-- [ ] Remove all challenge-related comments from code (no "TODO", "Challenge Task", "Recover Figure")
-- [ ] Transform document title/subtitle to "Using Randomization & Stratification to Overcome A Common Cause Confounder"
-- [ ] Remove challenge framing sections (challenge callout, submission checklist, tips)
-- [ ] Polish the document to read like a complete, professional report
-- [ ] Ensure the narrative flows naturally without challenge references
-
-## Tips
-
-- Read the narrative carefully—it contains hints about what each figure should show
-- Use the statistical results mentioned in the text to verify your figures are correct
-- Keep styling consistent across all three figures
-- Test with both R and Python code chunks if you want to show versatility
-- Set random seeds if you're doing any additional analysis for reproducibility
